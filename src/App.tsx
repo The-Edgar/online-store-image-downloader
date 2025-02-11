@@ -195,7 +195,7 @@ function App() {
                     type="text"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    placeholder="Enter product page URL (European independent store)"
+                    placeholder="Enter shopify product page URL"
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                     disabled={isLoading}
                   />
