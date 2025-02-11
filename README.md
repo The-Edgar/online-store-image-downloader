@@ -1,84 +1,70 @@
 # Product Image Fetcher 🖼️
 
-A powerful web application that helps you extract and download product images from e-commerce websites in bulk. Built with React, TypeScript, and Vite.
+A web application that helps you extract and download product images from Shopify stores in bulk. Built with React, TypeScript, and Vite.
 
 ## 🌟 Features
 
-- 📥 Extract product images from e-commerce websites
+- 📥 Extract product images from Shopify stores
 - 🗃️ Bulk download images as ZIP
 - ✨ Clean, modern interface
 - 📱 Responsive design
-- 🚀 Fast and efficient
-- 🛡️ Type-safe with TypeScript
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
+- Node.js (v18.17.0 or higher)
 - npm or yarn
 
-### Installation
+### Local Development
 
-1. Clone the repository
+1. Clone and install dependencies:
    ```bash
-   git clone https://github.com/yourusername/product-image-fetcher.git
+   git clone <repository-url>
    cd product-image-fetcher
-   ```
-
-2. Install dependencies
-   ```bash
    npm install
    ```
-   or
-   ```bash
-   yarn install
-   ```
 
-3. Start the development server
+2. Start development server:
    ```bash
    npm run dev
    ```
-   or
-   ```bash
-   yarn dev
-   ```
 
-4. Open your browser and visit `http://localhost:5173`
+3. Open http://localhost:5173 in your browser
 
-## 🛠️ Build
+## 🌐 Deployment
+
+### Deploy to Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Visit [Vercel](https://vercel.com)
+3. Click "Import Project"
+4. Select your repository
+5. Configure project:
+   - Framework Preset: Vite
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+6. Click "Deploy"
+
+The app will be automatically deployed and you'll receive a production URL.
+
+### Manual Build
 
 To build for production:
 ```bash
 npm run build
 ```
-or
-```bash
-yarn build
-```
 
-## 🧰 Tech Stack
+## 🛠️ Tech Stack
 
-- [React](https://reactjs.org/) - UI Library
-- [TypeScript](https://www.typescriptlang.org/) - Type Safety
-- [Vite](https://vitejs.dev/) - Build Tool
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [JSZip](https://stuk.github.io/jszip/) - ZIP File Creation
-- [Lucide React](https://lucide.dev/) - Icons
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- JSZip
 
-## 📝 Usage
+## 📄 License
 
-1. Enter the URL of a product page in the input field
-2. Click "Extract Images" or press Enter
-3. Wait for the images to load
-4. Select the images you want to download
-5. Click "Download ZIP" to get all selected images
-
-## ⚠️ Important Notes
-
-- Due to CORS restrictions, the application may not work with all websites directly
-- For production use, you'll need to implement a proxy server
-- Some websites may block automated requests
+MIT License - See LICENSE file for details
 
 ## 🤝 Contributing
 
@@ -89,10 +75,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
