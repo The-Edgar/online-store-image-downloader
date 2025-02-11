@@ -111,8 +111,12 @@ function App() {
     };
 
     const downloadImages = async () => {
+      // Get domain name from the product URL
+      const domain = new URL(url).hostname.replace('www.', '');
+      const sanitizedDomain = domain.replace(/[^a-zA-Z0-9-]/g, '-');
+      
       const zip = new JSZip();
-      const folder = zip.folder('product_images');
+      const folder = zip.folder(`${sanitizedDomain}-images`);
       
       if (!folder) return;
 
@@ -120,7 +124,38 @@ function App() {
         try {
           const response = await fetch(images[i].url);
           const blob = await response.blob();
-          const extension = images[i].url.split('.').pop() || 'jpg';
+          
+          // Clean up the file extension by removing query parameters
+          const imageUrl = new URL(images[i].url);
+          const pathname = imageUrl.pathname;
+          
+          // Extract extension from pathname and remove any query parameters
+          let extension = pathname.split('.').pop()?.split('?')[0]?.toLowerCase() || '';
+          
+          // If no extension or unrecognized, determine from content type
+          if (!['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'].includes(extension)) {
+            const contentType = response.headers.get('content-type') || '';
+            switch (contentType) {
+              case 'image/jpeg':
+                extension = 'jpg';
+                break;
+              case 'image/png':
+                extension = 'png';
+                break;
+              case 'image/gif':
+                extension = 'gif';
+                break;
+              case 'image/webp':
+                extension = 'webp';
+                break;
+              case 'image/svg+xml':
+                extension = 'svg';
+                break;
+              default:
+                extension = 'jpg'; // fallback to jpg
+            }
+          }
+          
           folder.file(`image_${i + 1}.${extension}`, blob);
         } catch (error) {
           console.error('Error downloading image:', error);
@@ -128,14 +163,14 @@ function App() {
       }
 
       const content = await zip.generateAsync({ type: 'blob' });
-      const url = window.URL.createObjectURL(content);
+      const downloadUrl = window.URL.createObjectURL(content);
       const link = document.createElement('a');
-      link.href = url;
-      link.download = 'product_images.zip';
+      link.href = downloadUrl;
+      link.download = `${sanitizedDomain}-images.zip`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(downloadUrl);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -263,8 +298,9 @@ function App() {
         </div>
       </ErrorBoundary>
     );
-  } catch (error) {
-    console.error('Error in App component:', error);
+  } catch (err) {
+    console.error('Error in App component:', err);
+    const errorMessage = err instanceof Error ? err.message : 'An error occurred. Please try again later.';
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
         <div className="max-w-4xl mx-auto">
@@ -275,7 +311,7 @@ function App() {
             </div>
 
             <div className="mt-4 p-4 bg-red-50 text-red-700 rounded-lg">
-              {error || 'An error occurred. Please try again later.'}
+              {errorMessage}
             </div>
           </div>
 
