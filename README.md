@@ -62,6 +62,10 @@ npm run build
 - Tailwind CSS
 - JSZip
 
+## Diagram
+<img width="883" alt="Screenshot 2025-02-12 at 00 24 23" src="https://github.com/user-attachments/assets/dfc745e8-f813-42b8-98ca-d32f8de06a11" />
+
+
 ## 📄 License
 
 MIT License - See LICENSE file for details
